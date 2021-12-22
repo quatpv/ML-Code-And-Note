@@ -7,5 +7,3 @@ Learn ML from ML-From-Scratch repo
 - [x] [K Nearest Neighbors](src/supervised_learning/k_nearest_neighbors/k_nearest_neighbors.py)
 
 ### Unsupervised Learning
-
-### Deep Learning
