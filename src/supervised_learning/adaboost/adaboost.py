@@ -85,7 +85,33 @@ class Adaboost():
 
             # Normalize to one
             w /= np.sum(w)
-            
+
+            # Save classifier
+    
+    def predict(self, X):
+        n_samples = np.shape(X)[0]
+        y_pred = np.zeros((n_samples, 1))
+
+        # For each classifier => label the samples
+        for clf in self.clfs:
+            # Set all predictions to '1' initally
+            predictions = np.ones(np.shape(y_pred))
+            # The indexes where the sample values are below the threshold
+            negative_idx = (clf.polarity * X[:, clf.feature_index] < clf.polarity * clf.threshold)
+
+            # Label those as -1
+            predictions[negative_idx] = -1
+
+            # Add predictions weights by the classifier alpha
+            # (alpha indicative of classifier's preficiency)
+            y_pred += clf.alpha * predictions
+        
+        # Return sign of prediction sum
+        y_pred = np.sign(y_pred).flatten()
+
+        return y_pred
+    
+        
 
 
 
